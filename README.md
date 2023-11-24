@@ -1,0 +1,2 @@
+# VersionUpdate
+使用开源QSimpleUpdater库为个人项目增加简易的升级模块
