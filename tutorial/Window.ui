@@ -53,7 +53,7 @@
           <item>
            <widget class="QLabel" name="label_4">
             <property name="text">
-             <string>&lt;i&gt;A simpler way to update your Qt applications...&lt;/i&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;当前版本号: 0.0.0.0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -82,20 +82,10 @@
        <string>更新选项</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="installedVersion">
+       <item row="7" column="0">
+        <widget class="QCheckBox" name="mandatoryUpdate">
          <property name="text">
-          <string>0.1</string>
-         </property>
-         <property name="placeholderText">
-          <string>Write a version string...</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>设置安装的版本（最新版本已为1.0）</string>
+          <string>强制更新</string>
          </property>
         </widget>
        </item>
@@ -121,6 +111,9 @@
          <property name="text">
           <string>显示所有通知</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="5" column="0">
@@ -133,10 +126,20 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
-        <widget class="QCheckBox" name="mandatoryUpdate">
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="installedVersion">
          <property name="text">
-          <string>强制更新</string>
+          <string>0.1</string>
+         </property>
+         <property name="placeholderText">
+          <string>Write a version string...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>设置安装的版本（最新版本已为1.0）</string>
          </property>
         </widget>
        </item>

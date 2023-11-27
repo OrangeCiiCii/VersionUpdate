@@ -23,17 +23,22 @@
 #include "Updater.h"
 #include "QSimpleUpdater.h"
 
+
+/**
+ * URLS 是一个静态的 QList，保存了一组url字符串（QString）。
+ * UPDATERS 是一个静态的 QList，保存了一组指向 Updater 类对象的指针。
+ */
 static QList<QString> URLS;
 static QList<Updater *> UPDATERS;
 
 QSimpleUpdater::~QSimpleUpdater()
 {
-   URLS.clear();
+    URLS.clear();
 
-   foreach (Updater *updater, UPDATERS)
-      updater->deleteLater();
+    foreach (Updater *updater, UPDATERS)
+        updater->deleteLater();
 
-   UPDATERS.clear();
+    UPDATERS.clear();
 }
 
 /**
@@ -42,8 +47,8 @@ QSimpleUpdater::~QSimpleUpdater()
  */
 QSimpleUpdater *QSimpleUpdater::getInstance()
 {
-   static QSimpleUpdater updater;
-   return &updater;
+    static QSimpleUpdater updater;
+    return &updater;
 }
 
 /**
@@ -57,7 +62,7 @@ QSimpleUpdater *QSimpleUpdater::getInstance()
  */
 bool QSimpleUpdater::usesCustomAppcast(const QString &url) const
 {
-   return getUpdater(url)->customAppcast();
+    return getUpdater(url)->customAppcast();
 }
 
 /**
@@ -70,7 +75,7 @@ bool QSimpleUpdater::usesCustomAppcast(const QString &url) const
  */
 bool QSimpleUpdater::getNotifyOnUpdate(const QString &url) const
 {
-   return getUpdater(url)->notifyOnUpdate();
+    return getUpdater(url)->notifyOnUpdate();
 }
 
 /**
@@ -83,7 +88,7 @@ bool QSimpleUpdater::getNotifyOnUpdate(const QString &url) const
  */
 bool QSimpleUpdater::getNotifyOnFinish(const QString &url) const
 {
-   return getUpdater(url)->notifyOnFinish();
+    return getUpdater(url)->notifyOnFinish();
 }
 
 /**
@@ -97,7 +102,7 @@ bool QSimpleUpdater::getNotifyOnFinish(const QString &url) const
  */
 bool QSimpleUpdater::getUpdateAvailable(const QString &url) const
 {
-   return getUpdater(url)->updateAvailable();
+    return getUpdater(url)->updateAvailable();
 }
 
 /**
@@ -110,7 +115,7 @@ bool QSimpleUpdater::getUpdateAvailable(const QString &url) const
  */
 bool QSimpleUpdater::getDownloaderEnabled(const QString &url) const
 {
-   return getUpdater(url)->downloaderEnabled();
+    return getUpdater(url)->downloaderEnabled();
 }
 
 /**
@@ -127,7 +132,7 @@ bool QSimpleUpdater::getDownloaderEnabled(const QString &url) const
  */
 bool QSimpleUpdater::usesCustomInstallProcedures(const QString &url) const
 {
-   return getUpdater(url)->useCustomInstallProcedures();
+    return getUpdater(url)->useCustomInstallProcedures();
 }
 
 /**
@@ -142,7 +147,7 @@ bool QSimpleUpdater::usesCustomInstallProcedures(const QString &url) const
  */
 QString QSimpleUpdater::getOpenUrl(const QString &url) const
 {
-   return getUpdater(url)->openUrl();
+    return getUpdater(url)->openUrl();
 }
 
 /**
@@ -156,7 +161,7 @@ QString QSimpleUpdater::getOpenUrl(const QString &url) const
  */
 QString QSimpleUpdater::getChangelog(const QString &url) const
 {
-   return getUpdater(url)->changelog();
+    return getUpdater(url)->changelog();
 }
 
 /**
@@ -171,7 +176,7 @@ QString QSimpleUpdater::getChangelog(const QString &url) const
  */
 QString QSimpleUpdater::getModuleName(const QString &url) const
 {
-   return getUpdater(url)->moduleName();
+    return getUpdater(url)->moduleName();
 }
 
 /**
@@ -185,7 +190,7 @@ QString QSimpleUpdater::getModuleName(const QString &url) const
  */
 QString QSimpleUpdater::getDownloadUrl(const QString &url) const
 {
-   return getUpdater(url)->downloadUrl();
+    return getUpdater(url)->downloadUrl();
 }
 
 /**
@@ -204,7 +209,7 @@ QString QSimpleUpdater::getDownloadUrl(const QString &url) const
  */
 QString QSimpleUpdater::getPlatformKey(const QString &url) const
 {
-   return getUpdater(url)->platformKey();
+    return getUpdater(url)->platformKey();
 }
 
 /**
@@ -218,7 +223,7 @@ QString QSimpleUpdater::getPlatformKey(const QString &url) const
  */
 QString QSimpleUpdater::getLatestVersion(const QString &url) const
 {
-   return getUpdater(url)->latestVersion();
+    return getUpdater(url)->latestVersion();
 }
 
 /**
@@ -233,7 +238,7 @@ QString QSimpleUpdater::getLatestVersion(const QString &url) const
  */
 QString QSimpleUpdater::getModuleVersion(const QString &url) const
 {
-   return getUpdater(url)->moduleVersion();
+    return getUpdater(url)->moduleVersion();
 }
 
 /**
@@ -246,7 +251,7 @@ QString QSimpleUpdater::getModuleVersion(const QString &url) const
  */
 QString QSimpleUpdater::getUserAgentString(const QString &url) const
 {
-   return getUpdater(url)->userAgentString();
+    return getUpdater(url)->userAgentString();
 }
 
 /**
@@ -259,12 +264,9 @@ QString QSimpleUpdater::getUserAgentString(const QString &url) const
  */
 void QSimpleUpdater::checkForUpdates(const QString &url)
 {
-   getUpdater(url)->checkForUpdates();
+    getUpdater(url)->checkForUpdates();
 }
 
-/**
- * 设置下载目录
- */
 void QSimpleUpdater::setDownloadDir(const QString &url, const QString &dir)
 {
    getUpdater(url)->setDownloadDir(dir);
@@ -282,7 +284,7 @@ void QSimpleUpdater::setDownloadDir(const QString &url, const QString &dir)
  */
 void QSimpleUpdater::setModuleName(const QString &url, const QString &name)
 {
-   getUpdater(url)->setModuleName(name);
+    getUpdater(url)->setModuleName(name);
 }
 
 /**
@@ -295,7 +297,7 @@ void QSimpleUpdater::setModuleName(const QString &url, const QString &name)
  */
 void QSimpleUpdater::setNotifyOnUpdate(const QString &url, const bool notify)
 {
-   getUpdater(url)->setNotifyOnUpdate(notify);
+    getUpdater(url)->setNotifyOnUpdate(notify);
 }
 
 /**
@@ -309,7 +311,7 @@ void QSimpleUpdater::setNotifyOnUpdate(const QString &url, const bool notify)
  */
 void QSimpleUpdater::setNotifyOnFinish(const QString &url, const bool notify)
 {
-   getUpdater(url)->setNotifyOnFinish(notify);
+    getUpdater(url)->setNotifyOnFinish(notify);
 }
 
 /**
@@ -329,7 +331,7 @@ void QSimpleUpdater::setNotifyOnFinish(const QString &url, const bool notify)
  */
 void QSimpleUpdater::setPlatformKey(const QString &url, const QString &platform)
 {
-   getUpdater(url)->setPlatformKey(platform);
+    getUpdater(url)->setPlatformKey(platform);
 }
 
 /**
@@ -343,7 +345,7 @@ void QSimpleUpdater::setPlatformKey(const QString &url, const QString &platform)
  */
 void QSimpleUpdater::setModuleVersion(const QString &url, const QString &version)
 {
-   getUpdater(url)->setModuleVersion(version);
+    getUpdater(url)->setModuleVersion(version);
 }
 
 /**
@@ -357,7 +359,7 @@ void QSimpleUpdater::setModuleVersion(const QString &url, const QString &version
  */
 void QSimpleUpdater::setDownloaderEnabled(const QString &url, const bool enabled)
 {
-   getUpdater(url)->setDownloaderEnabled(enabled);
+    getUpdater(url)->setDownloaderEnabled(enabled);
 }
 
 /**
@@ -370,7 +372,7 @@ void QSimpleUpdater::setDownloaderEnabled(const QString &url, const bool enabled
  */
 void QSimpleUpdater::setUserAgentString(const QString &url, const QString &agent)
 {
-   getUpdater(url)->setUserAgentString(agent);
+    getUpdater(url)->setUserAgentString(agent);
 }
 
 /**
@@ -385,7 +387,7 @@ void QSimpleUpdater::setUserAgentString(const QString &url, const QString &agent
  */
 void QSimpleUpdater::setUseCustomAppcast(const QString &url, const bool customAppcast)
 {
-   getUpdater(url)->setUseCustomAppcast(customAppcast);
+    getUpdater(url)->setUseCustomAppcast(customAppcast);
 }
 
 /**
@@ -402,14 +404,14 @@ void QSimpleUpdater::setUseCustomAppcast(const QString &url, const bool customAp
  */
 void QSimpleUpdater::setUseCustomInstallProcedures(const QString &url, const bool custom)
 {
-   getUpdater(url)->setUseCustomInstallProcedures(custom);
+    getUpdater(url)->setUseCustomInstallProcedures(custom);
 }
 /**
  * 设置是否为强制更新
  */
 void QSimpleUpdater::setMandatoryUpdate(const QString &url, const bool mandatory_update)
 {
-   getUpdater(url)->setMandatoryUpdate(mandatory_update);
+    getUpdater(url)->setMandatoryUpdate(mandatory_update);
 }
 
 /**
@@ -421,21 +423,32 @@ void QSimpleUpdater::setMandatoryUpdate(const QString &url, const bool mandatory
  */
 Updater *QSimpleUpdater::getUpdater(const QString &url) const
 {
-   if (!URLS.contains(url))
-   {
-      Updater *updater = new Updater;
-      updater->setUrl(url);
+    if (!URLS.contains(url))
+    {
+        /**
+        * 创建一个 Updater 类的实例并分配其内存空间给指针 updater
+        * 一个动态分配对象的操作，用于在堆上创建一个 Updater 对象
+        */
+        Updater *updater = new Updater;
+        updater->setUrl(url);
 
-      URLS.append(url);
-      UPDATERS.append(updater);
+        URLS.append(url);
+        UPDATERS.append(updater);
 
-      connect(updater, SIGNAL(checkingFinished(QString)), this, SIGNAL(checkingFinished(QString)));
-      connect(updater, SIGNAL(downloadFinished(QString, QString)), this, SIGNAL(downloadFinished(QString, QString)));
-      connect(updater, SIGNAL(appcastDownloaded(QString, QByteArray)), this,
-              SIGNAL(appcastDownloaded(QString, QByteArray)));
-   }
+        /**
+         * checkingFinished 信号是 Updater 类中定义的信号，用于通知检查完成。
+         * 当 Updater 对象发出 checkingFinished 信号时，当前对象也会发出相同的信号
+         * 连接这两个信号的目的是在当前对象中处理 Updater 对象检查完成的事件。
+         * (也就是 Window.cpp中的“connect(m_updater, SIGNAL(checkingFinished(QString)), this, SLOT(updateChangelog(QString)))”中处理“updateChangelog(QString)”)
+         */
+        connect(updater, SIGNAL(checkingFinished(QString)), this, SIGNAL(checkingFinished(QString)));
+        connect(updater, SIGNAL(downloadFinished(QString, QString)), this, SIGNAL(downloadFinished(QString, QString)));
+        connect(updater, SIGNAL(appcastDownloaded(QString, QByteArray)), this,
+                SIGNAL(appcastDownloaded(QString, QByteArray)));
+    }
 
-   return UPDATERS.at(URLS.indexOf(url));
+    //根据给定的URL返回相应 Updater 指针
+    return UPDATERS.at(URLS.indexOf(url));
 }
 
 #if QSU_INCLUDE_MOC
