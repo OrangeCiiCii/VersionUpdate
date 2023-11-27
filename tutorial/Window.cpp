@@ -33,7 +33,7 @@ Window::Window(QWidget *parent)
 {
     m_ui = new Ui::Window;
     m_ui->setupUi(this);
-    //   m_ui->label_4->setText("当前的版本号: "+QCoreApplication::applicationVersion());
+    m_ui->label_4->setText("当前的版本号: "+QCoreApplication::applicationVersion());
     setWindowTitle("在线升级窗口");
     setWindowIcon(QIcon(":/source/update.png"));
 

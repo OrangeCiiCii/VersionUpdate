@@ -463,10 +463,8 @@ void Updater::onReply(QNetworkReply *reply)
         m_mandatoryUpdate = platform.value("mandatory-update").toBool();
 
     /* Compare latest and current version  比较版本并设置相应信息（比较最新版本和当前版本，并设置更新是否可用）*/
-    qDebug()<<"["<<__FILE__<<":"<<__LINE__<<"]"<<latestVersion()<< moduleVersion();
     setUpdateAvailable(compare(latestVersion(), moduleVersion()));
-    qDebug()<<"["<<__FILE__<<":"<<__LINE__<<"]"<<compare(latestVersion(), moduleVersion());
-    qDebug()<<"["<<__FILE__<<":"<<__LINE__<<"]"<<compare("1.0.0.2","1.0.0.1");
+
     /* 无论上述哪种情况，最后都会发出 checkingFinished 信号，通知检查完成 */
     emit checkingFinished(url());
 }

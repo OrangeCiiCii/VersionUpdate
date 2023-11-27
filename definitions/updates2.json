@@ -2,9 +2,9 @@
   "updates": {
     "windows": {
       "open-url": "",
-      "latest-version": "1.0.0.2",
+      "latest-version": "1.0.0.1",
       "download-url": "https://raw.githubusercontent.com/OrangeCiiCii/VersionUpdate/main/download/2_12M.jpg",
-      "changelog": "1.0.0.2版本的更新日志",
+      "changelog": "1.0.0.1版本的更新日志",
       "mandatory": true
     },
     "osx": {
