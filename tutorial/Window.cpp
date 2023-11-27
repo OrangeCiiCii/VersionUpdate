@@ -69,22 +69,13 @@ Window::~Window()
 
 void Window::checkForUpdates()
 {
-    /* Get settings from the UI */
-    //   QString version = m_ui->installedVersion->text();
-
-    bool notifyOnFinish = m_ui->showAllNotifcations->isChecked();
-    bool notifyOnUpdate = m_ui->showUpdateNotifications->isChecked();
-    bool downloaderEnabled = m_ui->enableDownloader->isChecked();
-    bool customAppcast = m_ui->customAppcast->isChecked();
-    bool mandatoryUpdate = m_ui->mandatoryUpdate->isChecked();
-
     /* Apply the settings */
-    //   m_updater->setModuleVersion(DEFS_URL, version);
-    m_updater->setNotifyOnFinish(DEFS_URL2, notifyOnFinish);
-    m_updater->setNotifyOnUpdate(DEFS_URL2, notifyOnUpdate);
-    m_updater->setDownloaderEnabled(DEFS_URL2, downloaderEnabled);
-    m_updater->setUseCustomAppcast(DEFS_URL2, customAppcast);
-    m_updater->setMandatoryUpdate(DEFS_URL2, mandatoryUpdate);
+    //   m_updater->setModuleVersion(DEFS_URL, version);//回滚机制
+    m_updater->setNotifyOnFinish(DEFS_URL2, true);
+    m_updater->setNotifyOnUpdate(DEFS_URL2, true);
+    m_updater->setDownloaderEnabled(DEFS_URL2, true); //若不启用集成下载器，则弹出网页端进行下载
+    m_updater->setUseCustomAppcast(DEFS_URL2, false);
+    m_updater->setMandatoryUpdate(DEFS_URL2, false);
 
     /* Check for updates */
     m_updater->checkForUpdates(DEFS_URL2);

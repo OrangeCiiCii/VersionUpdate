@@ -439,7 +439,9 @@ void Updater::onReply(QNetworkReply *reply)
         return;
     }
 
-    /* Try to create a JSON document from downloaded data  尝试从下载的数据中创建一个 JSON 文档 */
+    /* Try to create a JSON document from downloaded data
+     * 尝试从下载的数据中创建一个 JSON 文档
+     */
     QJsonDocument document = QJsonDocument::fromJson(reply->readAll());
 
     /* JSON is invalid  如果 JSON 无效，设置更新不可用并发出 checkingFinished 信号*/
@@ -459,10 +461,15 @@ void Updater::onReply(QNetworkReply *reply)
     m_changelog = platform.value("changelog").toString();
     m_downloadUrl = platform.value("download-url").toString();
     m_latestVersion = platform.value("latest-version").toString();
+    //"mandatory-update"强制更新
     if (platform.contains("mandatory-update"))
         m_mandatoryUpdate = platform.value("mandatory-update").toBool();
 
-    /* Compare latest and current version  比较版本并设置相应信息（比较最新版本和当前版本，并设置更新是否可用）*/
+    /* Compare latest and current version
+     * 比较版本并设置相应信息（比较最新版本和当前版本，并设置更新是否可用）
+     *
+     * setUpdateAvailable(bool) 根据更新的可用性和更新程序的设置提示用户
+     */
     setUpdateAvailable(compare(latestVersion(), moduleVersion()));
 
     /* 无论上述哪种情况，最后都会发出 checkingFinished 信号，通知检查完成 */
@@ -484,15 +491,14 @@ void Updater::setUpdateAvailable(const bool available)
 
     if (updateAvailable() && (notifyOnUpdate() || notifyOnFinish()))
     {
-        QString text = tr("Would you like to download the update now?");
+        QString text = tr("您想立即下载更新吗？");
         if (m_mandatoryUpdate)
         {
-            text = tr("Would you like to download the update now? This is a mandatory update, exiting now will close the "
-                      "application");
+            text = tr("您想立即下载更新吗？这是强制更新，现在退出将关闭应用程序");
         }
 
         QString title
-                = "<h3>" + tr("Version %1 of %2 has been released!").arg(latestVersion()).arg(moduleName()) + "</h3>";
+                = "<h3>" + tr("%1版本的%2已发布!").arg(latestVersion()).arg(moduleName()) + "</h3>";
 
         box.setText(title);
         box.setInformativeText(text);
@@ -527,10 +533,9 @@ void Updater::setUpdateAvailable(const bool available)
     else if (notifyOnFinish())
     {
         box.setStandardButtons(QMessageBox::Close);
-        box.setInformativeText(tr("No updates are available for the moment"));
+        box.setInformativeText(tr("暂时没有可用更新"));
         box.setText("<h3>"
-                    + tr("Congratulations! You are running the "
-                         "latest version of %1")
+                    + tr("当前已是最新版本的 %1")
                     .arg(moduleName())
                     + "</h3>");
 
