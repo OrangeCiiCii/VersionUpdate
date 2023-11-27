@@ -80,14 +80,14 @@ void Window::checkForUpdates()
 
     /* Apply the settings */
     //   m_updater->setModuleVersion(DEFS_URL, version);
-    m_updater->setNotifyOnFinish(DEFS_URL, notifyOnFinish);
-    m_updater->setNotifyOnUpdate(DEFS_URL, notifyOnUpdate);
-    m_updater->setDownloaderEnabled(DEFS_URL, downloaderEnabled);
-    m_updater->setUseCustomAppcast(DEFS_URL, customAppcast);
-    m_updater->setMandatoryUpdate(DEFS_URL, mandatoryUpdate);
+    m_updater->setNotifyOnFinish(DEFS_URL2, notifyOnFinish);
+    m_updater->setNotifyOnUpdate(DEFS_URL2, notifyOnUpdate);
+    m_updater->setDownloaderEnabled(DEFS_URL2, downloaderEnabled);
+    m_updater->setUseCustomAppcast(DEFS_URL2, customAppcast);
+    m_updater->setMandatoryUpdate(DEFS_URL2, mandatoryUpdate);
 
     /* Check for updates */
-    m_updater->checkForUpdates(DEFS_URL);
+    m_updater->checkForUpdates(DEFS_URL2);
 }
 
 //==============================================================================
@@ -96,7 +96,7 @@ void Window::checkForUpdates()
 
 void Window::updateChangelog(const QString &url)
 {
-    if (url == DEFS_URL)
+    if (url == DEFS_URL2)
         m_ui->changelogText->setText(m_updater->getChangelog(url));
 }
 
@@ -106,7 +106,7 @@ void Window::updateChangelog(const QString &url)
 
 void Window::displayAppcast(const QString &url, const QByteArray &reply)
 {
-    if (url == DEFS_URL)
+    if (url == DEFS_URL2)
     {
         QString text = "This is the downloaded appcast: <p><pre>" + QString::fromUtf8(reply)
                 + "</pre></p><p> If you need to store more information on the "
