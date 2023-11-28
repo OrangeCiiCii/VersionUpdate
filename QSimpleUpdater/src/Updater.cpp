@@ -26,6 +26,7 @@
 #include <QApplication>
 #include <QJsonDocument>
 #include <QDesktopServices>
+#include <QTextEdit>
 
 #include "Updater.h"
 #include "Downloader.h"
@@ -83,7 +84,7 @@ Updater::~Updater()
 
 /**
  * Returns the URL of the update definitions file
- * 返回更新定义文件的URL
+ * 返回更新定义文件的URL(.json配置文件)
  */
 QString Updater::url() const
 {
@@ -488,20 +489,26 @@ void Updater::setUpdateAvailable(const bool available)
     QMessageBox box;
     box.setTextFormat(Qt::RichText);
     box.setIcon(QMessageBox::Information);
+    box.setWindowIcon(QIcon(":/icons/nupdate.png"));
+
 
     if (updateAvailable() && (notifyOnUpdate() || notifyOnFinish()))
     {
-        QString text = tr("您想立即下载更新吗？");
+        QString text = tr("有新版本的更新可用，是否立即下载？");
         if (m_mandatoryUpdate)
         {
-            text = tr("您想立即下载更新吗？这是强制更新，现在退出将关闭应用程序");
+            text = tr("希望立即下载更新吗？这是强制更新，现在退出将关闭应用程序");
         }
 
         QString title
-                = "<h3>" + tr("%1版本的%2已发布!").arg(latestVersion()).arg(moduleName()) + "</h3>";
+                = "<h3>" + tr(" %1 版本的 %2 已发布!").arg(latestVersion()).arg(moduleName()) + "</h3>";
 
         box.setText(title);
+        box.setWindowTitle("下载窗口");
+        box.setWindowIcon(QIcon(":/icons/nupdate.png"));
+        box.setDetailedText(tr(m_changelog.toUtf8().constData()));
         box.setInformativeText(text);
+
         box.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
         box.setDefaultButton(QMessageBox::Yes);
 

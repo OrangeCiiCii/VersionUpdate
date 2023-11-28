@@ -24,6 +24,10 @@ static const QString DEFS_URL2 = "https://raw.githubusercontent.com/"
                                  "OrangeCiiCii/VersionUpdate/main/"
                                  "definitions/updates2.json";
 
+static const QString DEFS_URL3 = "https://raw.githubusercontent.com/"
+                                 "OrangeCiiCii/VersionUpdate/main/"
+                                 "definitions/updates3.json";
+
 //==============================================================================
 // Window::Window
 //==============================================================================
@@ -34,14 +38,15 @@ Window::Window(QWidget *parent)
     m_ui = new Ui::Window;
     m_ui->setupUi(this);
     m_ui->label_4->setText("当前的版本号: "+QCoreApplication::applicationVersion());
+
     setWindowTitle("在线升级窗口");
-    setWindowIcon(QIcon(":/source/update.png"));
+    setWindowIcon(QIcon(":/icons/nupdate.png"));
 
     /* QSimpleUpdater is single-instance */
     m_updater = QSimpleUpdater::getInstance();
 
     /* Check for updates when the "Check For Updates" button is clicked */
-    connect(m_updater, SIGNAL(checkingFinished(QString)), this, SLOT(updateChangelog(QString)));
+//    connect(m_updater, SIGNAL(checkingFinished(QString)), this, SLOT(updateChangelog(QString)));
     connect(m_updater, SIGNAL(appcastDownloaded(QString, QByteArray)), this, SLOT(displayAppcast(QString, QByteArray)));
 
     /* React to button clicks */
@@ -71,25 +76,26 @@ void Window::checkForUpdates()
 {
     /* Apply the settings */
     //   m_updater->setModuleVersion(DEFS_URL, version);//回滚机制
-    m_updater->setNotifyOnFinish(DEFS_URL2, true);
-    m_updater->setNotifyOnUpdate(DEFS_URL2, true);
-    m_updater->setDownloaderEnabled(DEFS_URL2, true); //若不启用集成下载器，则弹出网页端进行下载
-    m_updater->setUseCustomAppcast(DEFS_URL2, false);
-    m_updater->setMandatoryUpdate(DEFS_URL2, false);
+    m_updater->setNotifyOnFinish(DEFS_URL3, true);
+    m_updater->setNotifyOnUpdate(DEFS_URL3, true);
+    m_updater->setDownloaderEnabled(DEFS_URL3, true); //若不启用集成下载器，则弹出网页端进行下载
+    m_updater->setUseCustomInstallProcedures(DEFS_URL3,false);//默认false,启用自动安装
+    m_updater->setUseCustomAppcast(DEFS_URL3, false);
+    m_updater->setMandatoryUpdate(DEFS_URL3, false);//默认false,不强制更新
 
     /* Check for updates */
-    m_updater->checkForUpdates(DEFS_URL2);
+    m_updater->checkForUpdates(DEFS_URL3);
 }
 
 //==============================================================================
 // Window::updateChangelog
 //==============================================================================
 
-void Window::updateChangelog(const QString &url)
-{
-    if (url == DEFS_URL2)
-        m_ui->changelogText->setText(m_updater->getChangelog(url));
-}
+//void Window::updateChangelog(const QString &url)
+//{
+//    if (url == DEFS_URL3)
+//        m_ui->changelogText->setText(m_updater->getChangelog(url));
+//}
 
 //==============================================================================
 // Window::displayAppcast
@@ -97,7 +103,7 @@ void Window::updateChangelog(const QString &url)
 
 void Window::displayAppcast(const QString &url, const QByteArray &reply)
 {
-    if (url == DEFS_URL2)
+    if (url == DEFS_URL3)
     {
         QString text = "This is the downloaded appcast: <p><pre>" + QString::fromUtf8(reply)
                 + "</pre></p><p> If you need to store more information on the "

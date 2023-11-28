@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("主窗口");
-    setWindowIcon(QIcon(":/icon.png"));
+    setWindowIcon(QIcon(":/nicon.png"));
 }
 
 MainWindow::~MainWindow()
